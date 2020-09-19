@@ -1,0 +1,6 @@
+{
+	"arrowParens": "avoid",
+	"useTabs": true,
+	"tabWidth": 4,
+	"parser": "typescript"
+}
