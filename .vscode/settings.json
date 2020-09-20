@@ -7,6 +7,11 @@
         "**/.DS_Store": true,
         "**/*.map":true,
         "**/*.d.ts":true,
-        "**/.keep":true
+        "**/.keep":true,
+        "**/node_modules":true,
+        // not important
+        "**/LICENSE":true,
+        "**/README.md":true,
+        "**/package-lock.json":true,
     }
 }

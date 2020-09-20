@@ -1,10 +1,12 @@
 import express from "express";
 
-const server = express();
-
 // Express server configuration
+const server = express();
+server.use(express.json());
+server.use(express.urlencoded({ extended: true }));
+
 server.get("/", (_, res) => {
-	res.send("Hello World!");
+	return res.send("Hello World!");
 });
 
 export default server;
