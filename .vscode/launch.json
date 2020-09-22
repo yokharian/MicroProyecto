@@ -5,18 +5,22 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Nodemon",
-            "type": "node",
-            "request": "launch",
-            "skipFiles": ["<node_internals>/**"],
-            "program": "${workspaceFolder}\\build\\index.js"
+            "name":"build",
+            "request":"launch",
+            "type":"node-terminal",
+            "command": "npm run build"
         },
         {
-            "name": "Node",
-            "type": "node",
-            "request": "launch",
-            "skipFiles": ["<node_internals>/**"],
-            "program": "${workspaceFolder}\\build\\index.js"
+            "name":"Launch",
+            "request":"launch",
+            "type":"node-terminal",
+            "command": "npm run start"
+        },
+        {
+            "name":"Launch",
+            "request":"launch",
+            "type":"node-terminal",
+            "command": "npm run dev"
         }
     ]
 }

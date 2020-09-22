@@ -1,0 +1,3 @@
+[build]
+  command = "npm install && tsc && npm run build"
+  functions = "functions"

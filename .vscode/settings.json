@@ -1,17 +1,16 @@
-{
-    "files.exclude": {
-        "**/.git": true,
-        "**/.svn": true,
-        "**/.hg": true,
-        "**/CVS": true,
-        "**/.DS_Store": true,
-        "**/*.map":true,
-        "**/*.d.ts":true,
-        "**/.keep":true,
-        "**/node_modules":true,
-        // not important
-        "**/LICENSE":true,
-        "**/README.md":true,
-        "**/package-lock.json":true,
-    }
-}
+// {
+//     "files.exclude": {
+//         "**/.git": true,
+//         "**/.svn": true,
+//         "**/.hg": true,
+//         "**/CVS": true,
+//         "**/.DS_Store": true,
+//         "**/*.map":true,
+//         "**/*.d.ts":true,
+//         "**/.keep":true,
+//         "**/node_modules":true,
+//         // not important
+//         "**/LICENSE":true,
+//         "**/README.md":true
+//     }
+// }
