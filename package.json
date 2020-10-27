@@ -5,8 +5,8 @@
   "main": "build/server.js",
   "scripts": {
     "build": "netlify-lambda build build",
-    "start": "nodemon build/local.js",
-    "dev": "tsc -w"
+    "start": "nodemon server-local.js",
+    "dev": "nodemon build/server.js"
   },
   "keywords": [],
   "author": "drapaiton",
