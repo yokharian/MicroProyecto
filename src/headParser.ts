@@ -19,6 +19,7 @@ const router = express.Router();
 
 router.get('/hola', (_, res) => res.json({ 'hola': 'hola' }));
 
-app.use('/', router);
+app.use(path + 'headparser', router);
+
 module.exports = app;
 module.exports.handler = serverless(app);
