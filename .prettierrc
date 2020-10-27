@@ -1,6 +1,12 @@
 {
-	"arrowParens": "avoid",
+    "arrowParens": "avoid",
+    "parser":"typescript",
+    "singleQuote": true,
+    "bracketSpacing": true,
+    "trailingComma": "all",
+    "printWidth": 80,
 	"useTabs": true,
-	"tabWidth": 4,
-	"parser": "typescript"
+    "tabWidth": 4,
+    "quoteProps": "preserve",
+    "proseWrap": "always",
 }
