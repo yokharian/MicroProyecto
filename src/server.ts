@@ -8,9 +8,9 @@ import apis from './routes';
 const app = express();
 console.log('Starting Server.js');
 console.log(__dirname);
-console.log(require('fs').readdirSync(join(__dirname, 'opt')));
-console.log(require('fs').readdirSync(join(__dirname, 'opt', 'build')));
-console.log(require('fs').readdirSync(join(__dirname, 'opt', 'build', 'repo')));
+console.log(require('fs').readdirSync(join(__dirname)));
+console.log(require('fs').readdirSync(join(__dirname, 'build')));
+console.log(require('fs').readdirSync(join(__dirname, 'build')));
 
 const path = '/.netlify/functions/server/';
 
