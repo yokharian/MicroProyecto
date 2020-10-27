@@ -15,7 +15,7 @@ const router = express.Router();
 
 router.get('/', (_, res) => res.json({ 'hola': 'hola' }));
 
-app.use(path + apiName, router);
+app.use(path, router);
 
 module.exports = app;
 module.exports.handler = serverless(app);

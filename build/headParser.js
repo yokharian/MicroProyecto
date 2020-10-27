@@ -15,6 +15,6 @@ app.use('/public', express_1.default.static(path_1.join(__dirname, '../public/')
 console.log('Starting headParser.js');
 var router = express_1.default.Router();
 router.get('/', function (_, res) { return res.json({ 'hola': 'hola' }); });
-app.use(path + apiName, router);
+app.use(path, router);
 module.exports = app;
 module.exports.handler = serverless_http_1.default(app);
