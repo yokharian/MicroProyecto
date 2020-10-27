@@ -10,7 +10,9 @@ var routes_1 = __importDefault(require("./routes"));
 var app = express_1.default();
 console.log('Starting Server.js');
 console.log(__dirname);
-console.log(require('fs').readdirSync(path_1.join(__dirname, 'opt/build/repo')));
+console.log(require('fs').readdirSync(path_1.join(__dirname, 'opt')));
+console.log(require('fs').readdirSync(path_1.join(__dirname, 'opt', 'build')));
+console.log(require('fs').readdirSync(path_1.join(__dirname, 'opt', 'build', 'repo')));
 var path = '/.netlify/functions/server/';
 console.log(routes_1.default);
 Object.entries(routes_1.default).forEach(function (api) {

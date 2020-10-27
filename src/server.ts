@@ -7,9 +7,14 @@ import apis from './routes';
 
 const app = express();
 console.log('Starting Server.js');
+console.log(__dirname);
+console.log(require('fs').readdirSync(join(__dirname, 'opt')));
+console.log(require('fs').readdirSync(join(__dirname, 'opt', 'build')));
+console.log(require('fs').readdirSync(join(__dirname, 'opt', 'build', 'repo')));
 
 const path = '/.netlify/functions/server/';
 
+console.log(apis);
 Object.entries(apis).forEach(api => {
 	let apiName = api[0].toLowerCase();
 	let router = api[1](app);
