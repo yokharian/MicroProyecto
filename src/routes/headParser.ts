@@ -1,18 +1,18 @@
-import express from "express";
-const serverless = require('serverless-http')
+import express from 'express';
 
-const app = express();
+export default app => {
+	const { join } = require('path');
+	const publicHtml = join(__dirname, '../../public/html');
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+	app.use(express.json());
+	app.use(express.urlencoded({ extended: true }));
 
-let headParser = express.Router()
+	const router = express.Router();
 
-headParser.get("/",(req,res) => {
-    return res.json({"hola":"hola"}
-    );}
-);
+	router.get('/', (_, res) =>
+		res.sendFile(join(publicHtml, 'headParser.html')),
+	);
+	router.get('/hola', (_, res) => res.json({ 'hola': 'hola' }));
 
-app.use("/.netlify/functions/headparser", headParser)
-
-module.exports.handler = serverless(app)
+	return router;
+};

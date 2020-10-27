@@ -1,18 +1,17 @@
 "use strict";
-var express = require('express');
-var path = require('path');
-var serverless = require('serverless-http');
-var app = express();
-var bodyParser = require('body-parser');
-var router = express.Router();
-router.get('/', function (_, res) {
-    res.send('ok');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var express_1 = __importDefault(require("express"));
+var serverless_http_1 = __importDefault(require("serverless-http"));
+var app = express_1.default();
+console.log('Starting Server.js');
+require('./routes/').default({
+    app: app,
+    path: '/.netlify/functions/server/',
+    exclude: '(deprecated)|(timeStamp)|(tracker)|(urlshort)|(fileMeta)',
 });
-router.get('/okey', function (_, res) {
-    res.send('okboomer');
-});
-app.use(bodyParser.json());
-app.use('/.netlify/functions/server', router); // path must route to lambda
-app.use('/', function (_, res) { return res.sendFile(path.join(__dirname, '../index.html')); });
+app.use('/public', express_1.default.static(require('path').join(__dirname, '../public/')));
 module.exports = app;
-module.exports.handler = serverless(app);
+module.exports.handler = serverless_http_1.default(app);

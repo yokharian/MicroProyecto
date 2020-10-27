@@ -1,22 +1,20 @@
-const express = require('express');
-const path = require('path');
-const serverless = require('serverless-http');
+import express from 'express';
+import serverless from 'serverless-http';
+
 const app = express();
-const bodyParser = require('body-parser');
 
-const router = express.Router();
-router.get('/', (_, res) => {
-  res.send('ok')
+console.log('Starting Server.js');
+
+require('./routes/').default({
+	app: app,
+	path: '/.netlify/functions/server/',
+	exclude: '(deprecated)|(timeStamp)|(tracker)|(urlshort)|(fileMeta)',
 });
 
-router.get('/okey', (_, res) => {
-  res.send('okboomer')
-});
-
-
-app.use(bodyParser.json());
-app.use('/.netlify/functions/server', router);  // path must route to lambda
-app.use('/', (_, res) => res.sendFile(path.join(__dirname, '../index.html')));
+app.use(
+	'/public',
+	express.static(require('path').join(__dirname, '../public/')),
+);
 
 module.exports = app;
 module.exports.handler = serverless(app);
