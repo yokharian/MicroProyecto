@@ -36,7 +36,7 @@ router.get(
 router.get('/', (req, res) => {
 	res.send('hello world from timestamp');
 });
-app.use(path + apiName, router);
+app.use('/', router);
 
 module.exports = app;
 module.exports.handler = serverless(app);

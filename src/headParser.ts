@@ -4,9 +4,7 @@ import express from 'express';
 import serverless from 'serverless-http';
 
 import { join } from 'path';
-
-const path = '/.netlify/functions/server/';
-
+const apiName = 'headparser';
 const app = express();
 
 app.use(express.json());
@@ -17,9 +15,9 @@ console.log('Starting headParser.js');
 
 const router = express.Router();
 
-router.get('/hola', (_, res) => res.json({ 'hola': 'hola' }));
+router.get('/', (_, res) => res.json({ 'hola': 'hola' }));
 
-app.use(path + 'headparser', router);
+app.use('/', router);
 
 module.exports = app;
 module.exports.handler = serverless(app);

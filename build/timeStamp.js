@@ -27,6 +27,6 @@ router.get('/api/timestamp/:date_string?', function (req, res) {
 router.get('/', function (req, res) {
     res.send('hello world from timestamp');
 });
-app.use(path + apiName, router);
+app.use('/', router);
 module.exports = app;
 module.exports.handler = serverless_http_1.default(app);
