@@ -17,10 +17,8 @@ console.log('Starting headParser.js');
 
 const router = express.Router();
 
-router.get('/', (_, res) =>
-	res.sendFile(join(__dirname, '../public/html/headParser.html')),
-);
 router.get('/hola', (_, res) => res.json({ 'hola': 'hola' }));
 
+app.use('/', router);
 module.exports = app;
 module.exports.handler = serverless(app);
