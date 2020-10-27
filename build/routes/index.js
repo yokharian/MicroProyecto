@@ -12,9 +12,9 @@ exports.default = function (_a) {
         var apiName = api.slice(0, api.length - 3).toLowerCase();
         app.use(path + apiName, router);
     });
-    // app.use(path, (_, res) => {
-    // 	res.writeHead(200, { 'Content-Type': 'text/html' });
-    // 	res.write('<h1>Hello from Express.js!</h1>');
-    // 	res.end();
-    // });
+    app.use(path, function (_, res) {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.write('<h1>Hello from Express.js!</h1>');
+        res.end();
+    });
 };

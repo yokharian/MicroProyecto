@@ -1,6 +1,6 @@
 import express from 'express';
 import serverless from 'serverless-http';
-
+import { join } from 'path';
 const app = express();
 
 console.log('Starting Server.js');
@@ -11,10 +11,9 @@ require('./routes/').default({
 	exclude: '(deprecated)|(timeStamp)|(tracker)|(urlshort)|(fileMeta)',
 });
 
-app.use(
-	'/public',
-	express.static(require('path').join(__dirname, '../public/')),
-);
+app.use('/public', express.static(join(__dirname, '../public/')));
+
+app.use('/', (_, res) => res.sendFile(join(__dirname, '../index.html')));
 
 module.exports = app;
 module.exports.handler = serverless(app);
