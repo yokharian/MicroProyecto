@@ -6,6 +6,13 @@ const path = '/.netlify/functions/';
 
 const app = express();
 app.use('/public', express.static(join(__dirname, '../public/')));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+const router = express.Router();
+
+app.use(path + fileName.toLowerCase() + '/api', router); // path must route to lambda
 app.use(path + fileName.toLowerCase(), (_, res) => {
 	res.write(
 		`<!DOCTYPE html>
@@ -22,11 +29,5 @@ app.use(path + fileName.toLowerCase(), (_, res) => {
 	);
 	res.end();
 });
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-const router = express.Router();
-
-app.use(path + fileName.toLowerCase() + '/api', router); // path must route to lambda
 module.exports = app;
 module.exports.handler = serverless(app);
