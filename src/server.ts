@@ -7,13 +7,7 @@ const path = '/.netlify/functions/';
 const app = express();
 app.use('/public', express.static(join(__dirname, '../public/')));
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-const router = express.Router();
-
-app.use(path + fileName.toLowerCase() + '/api', router); // path must route to lambda
-app.use(path + fileName.toLowerCase(), (_, res) => {
+app.get(path + fileName.toLowerCase(), (_, res) => {
 	res.write(
 		`<!DOCTYPE html>
     <html lang="en">
@@ -23,7 +17,7 @@ app.use(path + fileName.toLowerCase(), (_, res) => {
         <title>Document</title>
     </head>
     <body>
-        hello
+        server
     </body>
     </html>`,
 	);
