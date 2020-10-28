@@ -11,12 +11,7 @@ const router = express.Router();
 
 app.use('/public', express.static(join(__dirname, '../public/')));
 
-router.get('/', (_, res) =>
-	res.sendFile(join(__dirname + '../public/html/index.html')),
-);
-router.get('/appii', (_, res) =>
-	res.sendFile(join(__dirname + '../public/html/index.html')),
-);
+router.get('/', (_, res) => res.sendFile(join(__dirname, '../public')));
 
 app.use(path + fileName.toLowerCase(), router); // path must route to lambda
 module.exports = app;

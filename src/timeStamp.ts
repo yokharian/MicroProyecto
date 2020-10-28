@@ -21,7 +21,7 @@ router.get('/api/:date_string?', (req, res) => {
 });
 
 router.get('/', (_, res) =>
-	res.sendFile(join(__dirname + '../public/html/timeStamp.html')),
+	res.sendFile(join(__dirname, '../public/html/timeStamp.html')),
 );
 
 app.use(path + apiName.toLowerCase(), router); // path must route to lambda
