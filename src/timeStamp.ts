@@ -9,9 +9,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 const router = express.Router();
 
-app.use('/public', express.static(join(__dirname, '../public/')));
-
-router.get('/:date_string?', (req, res) => {
+router.get('/api/:date_string?', (req, res) => {
 	var reqDate = new Date(req.params.date_string);
 	var responseDate = !isNaN(reqDate.getTime()) ? reqDate : new Date();
 
