@@ -22,7 +22,15 @@ router.get('/api/:date_string?', function (req, res) {
     return res.json(response);
 });
 router.get('/', function (_, res) {
-    return res.sendFile(path_1.join(__dirname, '../public/html/timeStamp.html'));
+    console.log(__dirname);
+    console.log(path_1.join(__dirname, '/opt'));
+    console.log(path_1.join(__dirname, '/build'));
+    console.log(path_1.join(__dirname, '/repo'));
+    console.log(path_1.join(__dirname, '../'));
+    console.log(path_1.join(__dirname, '../public'));
+    console.log(path_1.join(__dirname, '../public/'));
+    console.log(path_1.join(__dirname, '../public/html'));
+    res.sendFile(path_1.join(__dirname, '../public/html/timeStamp.html'));
 });
 app.use(path + apiName.toLowerCase(), router); // path must route to lambda
 module.exports = app;

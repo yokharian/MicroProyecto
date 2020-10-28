@@ -1,6 +1,6 @@
 import express from 'express';
 import serverless from 'serverless-http';
-import { join } from 'path';
+import { dirname, join } from 'path';
 const apiName = 'TimeStamp';
 const path = '/.netlify/functions/';
 
@@ -20,9 +20,17 @@ router.get('/api/:date_string?', (req, res) => {
 	return res.json(response);
 });
 
-router.get('/', (_, res) =>
-	res.sendFile(join(__dirname, '../public/html/timeStamp.html')),
-);
+router.get('/', (_, res) => {
+	console.log(__dirname);
+	console.log(join(__dirname, '/opt'));
+	console.log(join(__dirname, '/build'));
+	console.log(join(__dirname, '/repo'));
+	console.log(join(__dirname, '../'));
+	console.log(join(__dirname, '../public'));
+	console.log(join(__dirname, '../public/'));
+	console.log(join(__dirname, '../public/html'));
+	res.sendFile(join(__dirname, '../public/html/timeStamp.html'));
+});
 
 app.use(path + apiName.toLowerCase(), router); // path must route to lambda
 module.exports = app;
