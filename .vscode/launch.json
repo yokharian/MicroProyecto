@@ -5,22 +5,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name":"build",
-            "request":"launch",
-            "type":"node-terminal",
-            "command": "npm run build"
-        },
-        {
             "name":"Launch",
             "request":"launch",
             "type":"node-terminal",
             "command": "npm run start"
-        },
-        {
-            "name":"Launch",
-            "request":"launch",
-            "type":"node-terminal",
-            "command": "npm run dev"
         }
     ]
 }

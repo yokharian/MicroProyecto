@@ -13,6 +13,5 @@
         "**/LICENSE":true,
         "**/README.md":true,
         "**/package-lock.json":true,   
-    },
-    "git.ignoreLimitWarning": true
+    }
 }
