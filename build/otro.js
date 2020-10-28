@@ -13,6 +13,6 @@ router.get('/', function (req, res) {
 });
 router.get('/another', function (req, res) { return res.json({ route: req.originalUrl }); });
 router.post('/', function (req, res) { return res.json({ postBody: req.body }); });
-app.use('/.netlify/functions/server/otro', router); // path must route to lambda
+app.use('/.netlify/functions/otro', router); // path must route to lambda
 module.exports = app;
 module.exports.handler = serverless(app);
