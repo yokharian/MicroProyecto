@@ -22,14 +22,53 @@ router.get('/api/:date_string?', function (req, res) {
     return res.json(response);
 });
 router.get('/', function (_, res) {
-    console.log(__dirname);
-    console.log(path_1.join(__dirname, '/opt'));
-    console.log(path_1.join(__dirname, '/build'));
-    console.log(path_1.join(__dirname, '/repo'));
-    console.log(path_1.join(__dirname, '../'));
-    console.log(path_1.join(__dirname, '../public'));
-    console.log(path_1.join(__dirname, '../public/'));
-    console.log(path_1.join(__dirname, '../public/html'));
+    var fs = require('fs');
+    var path = require('path').join(__dirname, '../');
+    recursiveloop(path, function (err, result) {
+        /* begin processing of each result */
+        // For each file in the array
+        for (var i = 0; i < result.length; i++) {
+            //Write the name of the file
+            console.log('Processing: ' + result[i]);
+            //Read the file
+            fs.readFile(result[i], 'utf8', function (err, data) {
+                //If there is an error notify to the console
+                if (err)
+                    console.log('Error: ' + err);
+                //Parse the json object
+                var obj = JSON.parse(data);
+                //Print out contents
+                console.log('Name: ' + obj.name);
+                console.log('Position: ' + obj.position);
+            });
+        }
+    });
+    function recursiveloop(dir, done) {
+        var results = [];
+        fs.readdir(dir, function (err, list) {
+            if (err)
+                return done(err);
+            var i = 0;
+            (function next() {
+                var file = list[i++];
+                if (!file)
+                    return done(null, results);
+                file = dir + '/' + file;
+                fs.stat(file, function (err, stat) {
+                    if (stat && stat.isDirectory()) {
+                        recursiveloop(file, function (err, res) {
+                            results = results.concat(res);
+                            next();
+                        });
+                    }
+                    else {
+                        results.push(file);
+                        next();
+                    }
+                });
+            })();
+        });
+    }
     res.sendFile(path_1.join(__dirname, '../public/html/timeStamp.html'));
 });
 app.use(path + apiName.toLowerCase(), router); // path must route to lambda
