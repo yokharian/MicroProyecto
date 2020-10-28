@@ -28,7 +28,7 @@ router.get('/:date_string?', (req, res) => {
 });
 
 app.use(
-	path + fileName.toLowerCase() + '/api' + fileName.toLowerCase(),
+	path + fileName.toLowerCase() + '/api/' + fileName.toLowerCase(),
 	router,
 ); // path must route to lambda
 
