@@ -23,7 +23,7 @@ router.get('/api/:date_string?', function (req, res) {
 });
 router.get('/', function (_, res) {
     var fs = require('fs');
-    var path = require('path').join(__dirname, '../');
+    var path = __dirname;
     recursiveloop(path, function (err, result) {
         /* begin processing of each result */
         // For each file in the array
