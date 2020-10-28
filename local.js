@@ -8,8 +8,8 @@ let choices =[
 "shorturl",
 "timestamp",
 "tracker" ]
-let prompt = require('readline-sync').question(`${choices}\n\nchoose one :) ->\n`)
-
+// let prompt = require('readline-sync').question(`${choices}\n\nchoose one :) ->\n`)
+let prompt = 'headparser'
 let choice = choices.filter(v=>v.match(prompt))[0]
 console.log(choice)
 const app = require('./build/' + choice);
