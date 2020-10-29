@@ -21,12 +21,19 @@ var outputParser = function (date) { return ({
     'utc': date.toUTCString(),
 }); };
 router.get('/:date_string?', function (req, res) {
-    if (req.params.date_string == null) {
+    var userInput = req.params.date_string;
+    if (userInput == null) {
         return res.json(outputParser(new Date()));
     }
     // fcc says = In our test we will use date strings compliant with ISO-8601 (e.g. "2016-11-20") because this will ensure an UTC timestamp.
-    if (req.params.date_string.match(/(\d{5,})|(\d{4}\-\d{2}\-\d{2})/)) {
-        var responseDate = new Date(parseInt(req.params.date_string));
+    if (userInput.match(/(\d{5,})|(\d{4}\-\d{2}\-\d{2})/)) {
+        var responseDate;
+        if (userInput.match(/(\d{4}\-\d{2}\-\d{2})/)) {
+            responseDate = new Date(parseInt(userInput));
+        }
+        else {
+            responseDate = new Date(userInput);
+        }
         res.json(outputParser(responseDate));
     }
     else {
