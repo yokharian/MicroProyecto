@@ -26,8 +26,7 @@ router.get('/:date_string?', function (req, res) {
     }
     // fcc says = In our test we will use date strings compliant with ISO-8601 (e.g. "2016-11-20") because this will ensure an UTC timestamp.
     if (req.params.date_string.match(/(\d{5,})|(\d{4}\-\d{2}\-\d{2})/)) {
-        var reqDate = new Date(req.params.date_string);
-        var responseDate = !isNaN(reqDate.getTime()) ? reqDate : new Date();
+        var responseDate = new Date(parseInt(req.params.date_string));
         res.json(outputParser(responseDate));
     }
     else {
