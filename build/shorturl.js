@@ -31,7 +31,7 @@ db.once('open', function () {
 });
 mongoose_auto_increment_1.default.initialize(db);
 // by Elsner https://regexr.com/
-var urlValidation = /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/;
+var urlValidation = /((\w+:\/\/)[-a-zA-Z0-9:@;?&=\/%\+\.\*!'\(\),\$_\{\}\^~\[\]`#|]+)/;
 var urlSchema = new mongoose_1.default.Schema({
     url: { type: String, required: true, match: urlValidation },
 });
@@ -68,7 +68,8 @@ router.post('/new/', function (req, res) {
                 .then(function (doc) { return res.json(documentToEndpointResponse(doc)); })
                 .catch(console.log);
         }
-    });
+    })
+        .catch(function (err) { return console.log(err); });
 });
 // GET
 router.use('/:id?', function (req, res) {

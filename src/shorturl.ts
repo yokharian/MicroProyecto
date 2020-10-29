@@ -5,6 +5,7 @@ import Express, { query } from 'express';
 import Mongoose from 'mongoose';
 import autoIncrement from 'mongoose-auto-increment';
 import { join } from 'path';
+import { send } from 'process';
 import serverless from 'serverless-http';
 dotEnvConfig();
 var app = Express();
@@ -33,7 +34,7 @@ db.once('open', function () {
 autoIncrement.initialize(db);
 
 // by Elsner https://regexr.com/
-const urlValidation = /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/;
+const urlValidation = /((\w+:\/\/)[-a-zA-Z0-9:@;?&=\/%\+\.\*!'\(\),\$_\{\}\^~\[\]`#|]+)/;
 
 const urlSchema = new Mongoose.Schema({
 	url: { type: String, required: true, match: urlValidation },
@@ -61,6 +62,8 @@ const documentToEndpointResponse = document => ({
 router.post('/new/', (req, res) => {
 	const url: string = req.body.url || 'https://noicefluid.com';
 
+	if (!url.match(urlValidation)) return res.json({ error: 'invalid url' });
+
 	urlModel
 		.findOne({ url: url }, (err, found) => {
 			if (err) console.log(err);
@@ -74,7 +77,8 @@ router.post('/new/', (req, res) => {
 					.then(doc => res.json(documentToEndpointResponse(doc)))
 					.catch(console.log);
 			}
-		});
+		})
+		.catch(err => console.log(err));
 });
 
 // GET
