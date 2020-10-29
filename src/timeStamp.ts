@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { response } from 'express';
 import serverless from 'serverless-http';
 import { join } from 'path';
 const fileName = 'timeStamp';
@@ -16,16 +16,30 @@ app.use('/public', express.static(join(__dirname, '../public/')));
 
 const router = express.Router();
 
+const outputParser = date => ({
+	'unix': date.getTime(),
+	'utc': date.toUTCString(),
+});
 router.get('/:date_string?', (req, res) => {
-	if (req.params.date_string) {
-		let reqDate = new Date(req.params.date_string);
-		var responseDate = !isNaN(reqDate.getTime()) ? reqDate : new Date();
-		res.json({
-			unix: responseDate.getTime(),
-			utc: responseDate.toUTCString(),
-		});
+	const userInput = req.params.date_string;
+
+	if (userInput == null) {
+		return res.json(outputParser(new Date()));
+	}
+
+	// fcc says = In our test we will use date strings compliant with ISO-8601 (e.g. "2016-11-20") because this will ensure an UTC timestamp.
+	if (!userInput.match(/(\d{5,})|(\d{4}\-\d{2}\-\d{2})/)) {
+		return res.json({ 'error': 'Invalid Date' });
+	}
+	// utc kind
+	if (userInput.match(/(\d{4}\-\d{2}\-\d{2})/)) {
+		return res.json(outputParser(new Date(userInput)));
 	} else {
-		res.json({ 'error': 'Invalid Date' });
+		// unix [0-9]+
+		let finalDate = parseInt(
+			userInput.match(/\d+/g)?.reduce((a, v) => a + v) || '',
+		);
+		return res.json(outputParser(new Date(finalDate)));
 	}
 });
 
