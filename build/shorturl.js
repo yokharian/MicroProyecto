@@ -51,6 +51,8 @@ var documentToEndpointResponse = function (document) { return ({
 }); };
 router.post('/new/', function (req, res) {
     var url = req.body.url || 'https://noicefluid.com';
+    if (!url.match(urlValidation))
+        return res.json({ error: 'invalid url' });
     urlModel
         .findOne({ url: url }, function (err, found) {
         if (err)
