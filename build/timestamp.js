@@ -16,14 +16,19 @@ app.use(cors({ optionsSuccessStatus: 200 })); // some legacy browsers choke on 2
 // http://expressjs.com/en/starter/static-files.html
 app.use('/public', express_1.default.static(path_1.join(__dirname, '../public/')));
 var router = express_1.default.Router();
+var outputParser = function (date) { return ({
+    'unix': date.getTime(),
+    'utc': date.toUTCString(),
+}); };
 router.get('/:date_string?', function (req, res) {
-    if (req.params.date_string) {
+    if (req.params.date_string == null) {
+        return res.json(outputParser(new Date()));
+    }
+    // fcc says = In our test we will use date strings compliant with ISO-8601 (e.g. "2016-11-20") because this will ensure an UTC timestamp.
+    if (req.params.date_string.match(/(\d{5,})|(\d{4}\-\d{2}\-\d{2})/)) {
         var reqDate = new Date(req.params.date_string);
         var responseDate = !isNaN(reqDate.getTime()) ? reqDate : new Date();
-        res.json({
-            unix: responseDate.getTime(),
-            utc: responseDate.toUTCString(),
-        });
+        res.json(outputParser(responseDate));
     }
     else {
         res.json({ 'error': 'Invalid Date' });
