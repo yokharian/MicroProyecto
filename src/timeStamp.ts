@@ -67,8 +67,8 @@ app.get(path + fileName.toLowerCase(), (_, res) => {
 		
 				<h3>Example Usage:</h3>
 				<ul>
-				  <li><a href="api/timestamp/2015-12-25">[project url]/api/timestamp/2015-12-25</a></li>
-				  <li><a href="api/timestamp/1451001600000">[project url]/api/timestamp/1451001600000</a></li>
+				  <li><a href="/api/timestamp/2015-12-25">[project url]/api/timestamp/2015-12-25</a></li>
+				  <li><a href="/api/timestamp/1451001600000">[project url]/api/timestamp/1451001600000</a></li>
 				</ul>
 		
 				<h3>Example Output:</h3>
@@ -78,13 +78,12 @@ app.get(path + fileName.toLowerCase(), (_, res) => {
 			  </div>
 			  <div class="footer">
 				<p>
-				  By <a href="https://www.freecodecamp.org/">freeCodeCamp</a>
+				  By <a href="https://www.noicefluid.com/">Dra. Paiton</a>
 				</p>
 			  </div>
 		   </body>
 		
-		</html>
-		`,
+		</html>`,
 	);
 	res.end();
 });
