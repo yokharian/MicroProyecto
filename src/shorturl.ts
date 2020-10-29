@@ -125,7 +125,7 @@ app.get(path + fileName.toLowerCase(), (_, res) => {
             <p>
               example: <code>POST [project_url]/api/shorturl/new</code> - <code>https://www.google.com</code>
             </p>
-            <form action="/api/shorturl/new" method="POST">
+            <form action="shorturl/api/shorturl/new" method="POST">
               <label for="url_input">URL to be shortened</label>
               <input id="url_input" type="text" name="url" value="https://www.freecodecamp.org">
               <input type="submit" value="POST URL">
