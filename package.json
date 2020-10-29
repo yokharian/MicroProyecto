@@ -13,7 +13,11 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "mongodb": "^3.6.2",
+    "mongoose": "^5.10.11",
+    "mongoose-auto-increment": "^5.0.1",
     "nanoid": "^3.1.16",
     "netlify-lambda": "^2.0.1",
     "serverless-http": "^2.6.0"
