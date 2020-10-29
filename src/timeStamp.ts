@@ -17,14 +17,16 @@ app.use('/public', express.static(join(__dirname, '../public/')));
 const router = express.Router();
 
 router.get('/:date_string?', (req, res) => {
-	var reqDate = new Date(req.params.date_string);
-	var responseDate = !isNaN(reqDate.getTime()) ? reqDate : new Date();
-
-	var response = {
-		unix: responseDate.getTime(),
-		utc: responseDate.toUTCString(),
-	};
-	return res.json(response);
+	if (req.params.date_string) {
+		let reqDate = new Date(req.params.date_string);
+		var responseDate = !isNaN(reqDate.getTime()) ? reqDate : new Date();
+		res.json({
+			unix: responseDate.getTime(),
+			utc: responseDate.toUTCString(),
+		});
+	} else {
+		res.json({ 'error': 'Invalid Date' });
+	}
 });
 
 app.use(

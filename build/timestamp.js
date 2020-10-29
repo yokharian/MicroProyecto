@@ -17,13 +17,17 @@ app.use(cors({ optionsSuccessStatus: 200 })); // some legacy browsers choke on 2
 app.use('/public', express_1.default.static(path_1.join(__dirname, '../public/')));
 var router = express_1.default.Router();
 router.get('/:date_string?', function (req, res) {
-    var reqDate = new Date(req.params.date_string);
-    var responseDate = !isNaN(reqDate.getTime()) ? reqDate : new Date();
-    var response = {
-        unix: responseDate.getTime(),
-        utc: responseDate.toUTCString(),
-    };
-    return res.json(response);
+    if (req.params.date_string) {
+        var reqDate = new Date(req.params.date_string);
+        var responseDate = !isNaN(reqDate.getTime()) ? reqDate : new Date();
+        res.json({
+            unix: responseDate.getTime(),
+            utc: responseDate.toUTCString(),
+        });
+    }
+    else {
+        res.json({ 'error': 'Invalid Date' });
+    }
 });
 app.use(path + fileName.toLowerCase() + '/api/' + fileName.toLowerCase(), router); // path must route to lambda
 // index
