@@ -1,11 +1,10 @@
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import { config as dotEnvConfig } from 'dotenv';
-import Express, { query } from 'express';
+import Express from 'express';
 import Mongoose from 'mongoose';
 import autoIncrement from 'mongoose-auto-increment';
 import { join } from 'path';
-import { send } from 'process';
 import serverless from 'serverless-http';
 dotEnvConfig();
 var app = Express();
@@ -14,7 +13,7 @@ const path = '/.netlify/functions/';
 
 //#region configs
 /** this project needs a db !! **/
-app.use(cors());
+app.use(cors({ optionsSuccessStatus: 200 })); // some legacy browsers choke on 204
 
 Mongoose.connect(process.env.DB_URI || '', {
 	useNewUrlParser: true,

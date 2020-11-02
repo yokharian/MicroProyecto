@@ -1,4 +1,4 @@
-import express, { response } from 'express';
+import express from 'express';
 import serverless from 'serverless-http';
 import { join } from 'path';
 const fileName = 'timeStamp';

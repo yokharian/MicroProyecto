@@ -17,7 +17,7 @@ var fileName = 'shortUrl';
 var path = '/.netlify/functions/';
 //#region configs
 /** this project needs a db !! **/
-app.use(cors_1.default());
+app.use(cors_1.default({ optionsSuccessStatus: 200 })); // some legacy browsers choke on 204
 mongoose_1.default.connect(process.env.DB_URI || '', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
