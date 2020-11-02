@@ -25,7 +25,7 @@ router.get('/whoami', (req, res) => {
 });
 
 app.use(path + fileName.toLowerCase() + '/api', router); // path must route to lambda
-app.get(path + fileName.toLowerCase(), (_, res) => {
+app.use(path + fileName.toLowerCase(), (_, res) => {
 	res.write(
 		`<!DOCTYPE html>
 

@@ -135,8 +135,8 @@ app.get(path + fileName.toLowerCase(), (_, res) => {
               <input type="submit" value="POST URL">
             </form>
             <h3>Example Usage:</h3>
-            <a href="shorturl/api/shorturl/3">
-              [this_project_url]/api/shorturl/3
+            <a href="/.netlify/functions/shorturl/api/shorturl/103">
+              [this_project_url]/api/shorturl/103
             </a>
           </div>
           <div class="footer">

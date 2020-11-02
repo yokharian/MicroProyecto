@@ -83,8 +83,8 @@ app.get(path + fileName.toLowerCase(), (_, res) => {
 		
 				<h3>Example Usage:</h3>
 				<ul>
-				  <li><a href="timestamp/api/timestamp/2015-12-25">[project url]/api/timestamp/2015-12-25</a></li>
-				  <li><a href="timestamp/api/timestamp/1451001600000">[project url]/api/timestamp/1451001600000</a></li>
+				  <li><a href="/.netlify/functions/timestamp/api/timestamp/2015-12-25">[project url]/api/timestamp/2015-12-25</a></li>
+				  <li><a href="/.netlify/functions/timestamp/api/timestamp/1451001600000">[project url]/api/timestamp/1451001600000</a></li>
 				</ul>
 		
 				<h3>Example Output:</h3>

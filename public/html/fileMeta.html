@@ -2,14 +2,14 @@
 
 <html>
 
-   <head>
+    <head>
       <title>File Metadata</title>
       <link rel="shortcut icon" href="https://cdn.hyperdev.com/us-east-1%3A52a203ff-088b-420f-81be-45bf559d01b1%2Ffavicon.ico" type="image/x-icon"/>
       <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
       <link href="/public/css/fileMeta.css" rel="stylesheet" type="text/css">
-   </head>
+    </head>
 
-   <body>
+    <body>
 
       <div class="container">
         <h2>API Project: File Metadata Microservice</h2>
@@ -26,7 +26,7 @@
         </p>
         <div class="view">
           <h4 id="output"></h4>
-          <form enctype="multipart/form-data" method="POST" action="filemeta/api/fileanalyse">
+          <form enctype="multipart/form-data" method="POST" action="/.netlify/functions/filemeta/api/fileanalyse">
             <input id="inputfield" type="file" name="upfile">
             <input id="button" type="submit" value="Upload">
           </form>
@@ -34,11 +34,10 @@
       </div>
       <div class="footer">
         <p>
-          by 
           By <a href="https://www.noicefluid.com/">Dra. Paiton</a>
         </p>
       </div>
-   </body>
+    </body>
 
 
 </html>
