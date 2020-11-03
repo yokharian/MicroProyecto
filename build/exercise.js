@@ -164,6 +164,21 @@ router.get('/log', function (req, res) {
     })
         .catch(function (err) { return console.log('findById\n\n', err); });
 });
+router.get('/users', function (req, res) {
+    console.log('get', req.params);
+    userModel
+        .find()
+        .then(function (found) {
+        return res.json(found.map(function (user) { return ({
+            'username': user.get('username'),
+            '_id': user.get('_id'),
+        }); }));
+    })
+        .catch(console.log);
+});
+router.post('/users', function (req, res) {
+    console.log('post', req.body);
+});
 //#region configs
 // // Not found middleware
 // router.use((req, res, next) => {
