@@ -6,7 +6,6 @@ import { config as dotEnvConfig } from 'dotenv';
 import Express from 'express';
 import cors from 'cors';
 import { join } from 'path';
-import { request } from 'http';
 dotEnvConfig();
 const path = '/.netlify/functions/';
 const fileName = 'exercise';
@@ -16,6 +15,7 @@ const app = Express();
 Mongoose.connect(process.env.DB_URI || '', {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
+	useFindAndModify: false,
 });
 
 var db = Mongoose.connection;
@@ -95,12 +95,13 @@ router.post('/add', (req, res) => {
 	if (req.body.date && !req.body.date.match(/(\d{5,})|(\d{4}\-\d{2}\-\d{2})/))
 		return res.json({ 'error': 'Invalid Date' });
 	//#endregion
-
+	new Date().toDateString();
 	const newLog = {
 		description: description,
 		duration: parseInt(duration),
-		date: date.toUTCString(),
+		date: date.toDateString(),
 	};
+
 	userModel
 		.findByIdAndUpdate(userId, { '$push': { 'log': newLog } })
 		.then(found => {

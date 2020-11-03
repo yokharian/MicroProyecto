@@ -30,6 +30,7 @@ var app = express_1.default();
 mongoose_1.default.connect(process.env.DB_URI || '', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify: false,
 });
 var db = mongoose_1.default.connection;
 db.on('error', function (err) {
@@ -97,10 +98,11 @@ router.post('/add', function (req, res) {
     if (req.body.date && !req.body.date.match(/(\d{5,})|(\d{4}\-\d{2}\-\d{2})/))
         return res.json({ 'error': 'Invalid Date' });
     //#endregion
+    new Date().toDateString();
     var newLog = {
         description: description,
         duration: parseInt(duration),
-        date: date.toUTCString(),
+        date: date.toDateString(),
     };
     userModel
         .findByIdAndUpdate(userId, { '$push': { 'log': newLog } })
