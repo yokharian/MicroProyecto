@@ -87,7 +87,7 @@ router.post('/add', function (req, res) {
             return new Date(parseInt(((_a = str.match(/\d+/g)) === null || _a === void 0 ? void 0 : _a.reduce(function (a, v) { return a + v; })) || ''));
         }
     };
-    var userId = req.body.userId;
+    var userId = req.body._id;
     var description = req.body.description;
     var duration = req.body.duration;
     // optional
@@ -119,7 +119,7 @@ router.post('/add', function (req, res) {
 });
 router.get('/log', function (req, res) {
     //#region args to params
-    var userId = typeof req.query.userId == 'string' && req.query.userId;
+    var userId = req.query._id;
     var from = typeof req.query.from == 'string' || typeof req.query.from == 'number'
         ? new Date(req.query.from).getTime()
         : new Date(0).getTime();
@@ -131,7 +131,7 @@ router.get('/log', function (req, res) {
         : -1;
     //#endregion
     if (!userId)
-        return res.json('empty userId route param');
+        return res.json('empty _id route param');
     var mergeObjectsIfAny = function () {
         var objetos = [];
         for (var _i = 0; _i < arguments.length; _i++) {
@@ -164,21 +164,6 @@ router.get('/log', function (req, res) {
     })
         .catch(function (err) { return console.log('findById\n\n', err); });
 });
-router.get('/users', function (req, res) {
-    console.log('get', req.params);
-    userModel
-        .find()
-        .then(function (found) {
-        return res.json(found.map(function (user) { return ({
-            'username': user.get('username'),
-            '_id': user.get('_id'),
-        }); }));
-    })
-        .catch(console.log);
-});
-router.post('/users', function (req, res) {
-    console.log('post', req.body);
-});
 //#region configs
 // // Not found middleware
 // router.use((req, res, next) => {
@@ -203,7 +188,7 @@ router.post('/users', function (req, res) {
 app.use(path + fileName.toLowerCase() + '/api/' + fileName.toLowerCase(), router); // path must route to lambda
 // index
 app.get(path + fileName.toLowerCase(), function (_, res) {
-    res.write("<!DOCTYPE html>\n\t\t<html>\n\t\t\n\t\t   <head>\n\t\t\t  <title>Exercise Tracker | Free Code Camp</title>\n\t\t\t  <link rel=\"shortcut icon\" href=\"https://cdn.hyperdev.com/us-east-1%3A52a203ff-088b-420f-81be-45bf559d01b1%2Ffavicon.ico\" type=\"image/x-icon\"/>\n\t\t\t  <link href=\"https://fonts.googleapis.com/css?family=Roboto\" rel=\"stylesheet\" type=\"text/css\">\n\t\t\t  <link href=\"/public/css/exercise.css\" rel=\"stylesheet\" type=\"text/css\">\n\t\t   </head>\n\t\t\n\t\t   <body>\n\t\t\t  <div class=\"container\">\n\t\t\t\t <h1>Exercise tracker</h1>\n\t\t\t\t  <form action=\"/.netlify/functions/exercise/api/exercise/new-user\" method=\"post\">\n\t\t\t\t\t<h3>Create a New User</h3>\n\t\t\t\t\t<p><code>POST /api/exercise/new-user</code></p>\n\t\t\t\t\t<input id=\"uname\" type=\"text\" name=\"username\" placeholder=\"username\">\n\t\t\t\t\t<input type=\"submit\" value=\"Submit\">\n\t\t\t\t  </form>\n\t\t\t\t  <form action=\"/.netlify/functions/exercise/api/exercise/add\" method=\"post\">\n\t\t\t\t\t<h3>Add exercises</h3>\n\t\t\t\t\t<p><code>POST /api/exercise/add</code></p>\n\t\t\t\t\t<input id=\"uid\" type=\"text\" name=\"userId\" placeholder=\"userId*\">\n\t\t\t\t\t<input id=\"desc\" type=\"text\" name=\"description\" placeholder=\"description*\">\n\t\t\t\t\t<input id=\"dur\" type=\"text\" name=\"duration\" placeholder=\"duration* (mins.)\">\n\t\t\t\t\t<input id=\"dat\" type=\"text\" name=\"date\" placeholder=\"date (yyyy-mm-dd)\">\n\t\t\t\t\t<input type=\"submit\" value=\"Submit\">\n\t\t\t\t  </form>\n\t\t\t\t  <p><strong>GET users's exercise log: </strong><code>GET /api/exercise/log?{userId}[&amp;from][&amp;to][&amp;limit]</code></p>\n\t\t\t\t  <p><strong>{ }</strong> = required, <strong>[ ]</strong> = optional</p>\n\t\t\t\t  <p><strong>from, to</strong> = dates (yyyy-mm-dd); <strong>limit</strong> = number</p>\n\t\t\t  </div>\n\t\t\t  <div class=\"footer\">\n\t\t\t\t <p>\n\t\t\t\t   By <a href=\"https://www.noicefluid.com/\">Dra. Paiton</a>\n\t\t\t\t </p>\n\t\t\t   </div>\n\t\t   </body>\n\t\t\n\t\t</html>\n\t\t");
+    res.write("<!DOCTYPE html>\n\t\t<html>\n\t\t\n\t\t   <head>\n\t\t\t  <title>Exercise Tracker | Free Code Camp</title>\n\t\t\t  <link rel=\"shortcut icon\" href=\"https://cdn.hyperdev.com/us-east-1%3A52a203ff-088b-420f-81be-45bf559d01b1%2Ffavicon.ico\" type=\"image/x-icon\"/>\n\t\t\t  <link href=\"https://fonts.googleapis.com/css?family=Roboto\" rel=\"stylesheet\" type=\"text/css\">\n\t\t\t  <link href=\"/public/css/exercise.css\" rel=\"stylesheet\" type=\"text/css\">\n\t\t   </head>\n\t\t\n\t\t   <body>\n\t\t\t  <div class=\"container\">\n\t\t\t\t <h1>Exercise tracker</h1>\n\t\t\t\t  <form action=\"/.netlify/functions/exercise/api/exercise/new-user\" method=\"post\">\n\t\t\t\t\t<h3>Create a New User</h3>\n\t\t\t\t\t<p><code>POST /api/exercise/new-user</code></p>\n\t\t\t\t\t<input id=\"uname\" type=\"text\" name=\"username\" placeholder=\"username\">\n\t\t\t\t\t<input type=\"submit\" value=\"Submit\">\n\t\t\t\t  </form>\n\t\t\t\t  <form action=\"/.netlify/functions/exercise/api/exercise/add\" method=\"post\">\n\t\t\t\t\t<h3>Add exercises</h3>\n\t\t\t\t\t<p><code>POST /api/exercise/add</code></p>\n\t\t\t\t\t<input id=\"uid\" type=\"text\" name=\"_id\" placeholder=\"_id*\">\n\t\t\t\t\t<input id=\"desc\" type=\"text\" name=\"description\" placeholder=\"description*\">\n\t\t\t\t\t<input id=\"dur\" type=\"text\" name=\"duration\" placeholder=\"duration* (mins.)\">\n\t\t\t\t\t<input id=\"dat\" type=\"text\" name=\"date\" placeholder=\"date (yyyy-mm-dd)\">\n\t\t\t\t\t<input type=\"submit\" value=\"Submit\">\n\t\t\t\t  </form>\n\t\t\t\t  <p><strong>GET users's exercise log: </strong><code>GET /api/exercise/log?{_id}[&amp;from][&amp;to][&amp;limit]</code></p>\n\t\t\t\t  <p><strong>{ }</strong> = required, <strong>[ ]</strong> = optional</p>\n\t\t\t\t  <p><strong>from, to</strong> = dates (yyyy-mm-dd); <strong>limit</strong> = number</p>\n\t\t\t  </div>\n\t\t\t  <div class=\"footer\">\n\t\t\t\t <p>\n\t\t\t\t   By <a href=\"https://www.noicefluid.com/\">Dra. Paiton</a>\n\t\t\t\t </p>\n\t\t\t   </div>\n\t\t   </body>\n\t\t\n\t\t</html>\n\t\t");
     res.end();
 });
 module.exports = app;
